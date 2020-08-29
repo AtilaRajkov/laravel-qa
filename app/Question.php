@@ -31,4 +31,18 @@ class Question extends Model
     return $this->created_at->diffForHumans();
     //return Carbon::parse($this->created_at)->format('d.m.Y.');
   }
+
+  public function getStatusAttribute()
+  {
+    if ($this->answers > 0) {
+      if ($this->best_answer_id != null) {
+        return "answered-accepted";
+      }
+      return "answered";
+    }
+
+    return "unanswered";
+  }
+
+
 }
