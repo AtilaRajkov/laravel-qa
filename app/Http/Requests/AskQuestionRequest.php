@@ -23,10 +23,17 @@ class AskQuestionRequest extends FormRequest
    */
   public function rules()
   {
-    return [
-      //'title' => 'required|string|min:3|max:255|unique:questions',
-      'title' => 'required|string|min:3|max:255',
+    $rules = [
+      'title' => 'required|string|min:3|max:255|unique:questions',
       'body' => 'required|string'
     ];
+
+    if (in_array($this->method(), ['PUT', 'PATCH'])) {
+      $question = $this->route()->parameter('question');
+      $rules['title'] =
+        'required|string|min:3|max:255|unique:questions,title,'.$question->id;
+    }
+
+    return $rules;
   }
 }
