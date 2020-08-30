@@ -22,6 +22,7 @@
                   method="post">
 {{--              {{ method_field('PUT') }}--}}
               @method('PUT')
+              <input type="hidden" name="redirects_to" value="{{ url()->previous() }}">
               @include('questions._form', ['buttonText' => 'Update the Question'])
             </form>
           </div>

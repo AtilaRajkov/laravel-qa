@@ -24,6 +24,7 @@ class CreateQuestionsTable extends Migration
       $table->unsignedInteger('best_answer_id')->nullable();
       $table->unsignedBigInteger('user_id');
       $table->timestamps();
+      $table->softDeletes();
 
       $table->foreign('user_id')
         ->references('id')

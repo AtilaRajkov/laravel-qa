@@ -17,7 +17,7 @@ class QuestionsController extends Controller
   {
     $questions = Question::with('user')
       ->latest()
-      ->paginate(10);
+      ->paginate(5);
 
     return view('questions.index', compact('questions'));
   }
@@ -91,7 +91,7 @@ class QuestionsController extends Controller
   {
     $question->update($request->only('title', 'body'));
 
-    return redirect()->route('questions.index')
+    return redirect(request('redirects_to'))
       ->with('success', 'Your question has been updated.');
   }
 
@@ -103,6 +103,9 @@ class QuestionsController extends Controller
    */
   public function destroy(Question $question)
   {
-    //
+    $question->delete();
+
+    return redirect()->back()
+      ->with('success', 'Your question has been deleted.');
   }
 }

@@ -51,6 +51,18 @@
                          class="btn btn-sm btn-outline-info">
                         Edit
                       </a>
+                      <form
+                          action="{{ route('questions.destroy', $question->id) }}"
+                          method="post"
+                          class="form-delete">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"
+                                class="btn btn-outline-danger btn-sm"
+                                onclick="return confirm('Are you sure?')">
+                          Delete
+                        </button>
+                      </form>
                     </div>
                   </div>
 
