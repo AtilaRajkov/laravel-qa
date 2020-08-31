@@ -48,14 +48,14 @@
                     </h3>
                     <div class="ml-auto">
 
-                      @if(Auth::user()->can('update-question', $question))
+                      @can('update', $question)
                         <a href="{{route('questions.edit', $question->id)}}"
                            class="btn btn-sm btn-outline-info">
                           Edit
                         </a>
-                      @endif
+                      @endcan
 
-                      @if(auth()->user()->can('delete-question', $question))
+                      @can('delete', $question)
                         <form
                             action="{{ route('questions.destroy', $question->id) }}"
                             method="post"
@@ -68,7 +68,7 @@
                             Delete
                           </button>
                         </form>
-                      @endif
+                      @endcan
 
                     </div>
                   </div>
