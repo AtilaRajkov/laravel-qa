@@ -13,10 +13,12 @@ class Question extends Model
 
   protected $fillable = ['title', 'body', 'user_id'];
 
+
   public function user()
   {
     return $this->belongsTo(User::class);
   }
+
 
   public function setTitleAttribute($value)
   {
@@ -24,16 +26,19 @@ class Question extends Model
     $this->attributes['slug'] = Str::slug($value);
   }
 
+
   public function getUrlAttribute()
   {
-    return route('questions.show', $this->id);
+    return route('questions.show', $this->slug);
   }
+
 
   public function getCreatedDateAttribute()
   {
     return $this->created_at->diffForHumans();
     //return Carbon::parse($this->created_at)->format('d.m.Y.');
   }
+
 
   public function getStatusAttribute()
   {
@@ -43,8 +48,13 @@ class Question extends Model
       }
       return "answered";
     }
-
     return "unanswered";
+  }
+
+
+  public function getBodyHtmlAttribute()
+  {
+    // This is resolved wit {!! $question->body !!}
   }
 
 

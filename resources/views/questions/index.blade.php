@@ -75,7 +75,7 @@
                       {{ $question->created_date }}
                     </small>
                   </p>
-                  {{ Str::limit($question->body, 250) }}
+                  {!! Str::limit($question->body, 250) !!}
                 </div>
               </div>
               <hr>
