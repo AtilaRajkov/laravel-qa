@@ -64,4 +64,12 @@ class Question extends Model
   }
 
 
+  public function getAnswersPaginatedAttribute()
+  {
+    return $this->answers()
+//      ->latest()
+      ->paginate(4);
+  }
+
+
 }
