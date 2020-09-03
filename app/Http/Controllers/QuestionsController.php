@@ -135,4 +135,12 @@ class QuestionsController extends Controller
     return redirect()->back()
       ->with('success', 'Your question has been deleted.');
   }
+
+
+  public function favorite(Question $question)
+  {
+    $question->toggleFavorite();
+    return back();
+  }
+
 }

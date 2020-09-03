@@ -20,6 +20,9 @@ class Question extends Model
   }
 
 
+
+
+
   public function setTitleAttribute($value)
   {
     $this->attributes['title'] = $value;
@@ -71,12 +74,51 @@ class Question extends Model
   }
 
 
+  public function favorites()
+  {
+    return $this->belongsToMany(User::class, 'favorites')
+      ->withTimestamps(); // , 'question_id', ''user_id);
+  }
+
+
+  public function isFavorited()
+  {
+    return $this->favorites()->where('user_id', auth()->id())->count() > 0;
+  }
+
+
+  public function getIsFavoritedAttribute()
+  {
+    return $this->isFavorited();
+  }
+
+
+  public function getFavoritesCountAttribute()
+  {
+    return $this->favorites->count();
+  }
+
+
   public function getAnswersPaginatedAttribute()
   {
     return $this->answers()
 //      ->latest()
       ->paginate(4);
   }
+
+  public function toggleFavorite()
+  {
+    if (
+    $this->favorites()->where('user_id', auth()->id())->exists()
+    ) {
+      // Already favorited by this user
+      $this->favorites()->detach(auth()->id());
+    } else {
+      // Not favorited yet
+      $this->favorites()->attach(auth()->id());
+    }
+  }
+
 
 
 }

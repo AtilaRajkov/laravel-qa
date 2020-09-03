@@ -35,3 +35,6 @@ Route::get('/questions/{slug}', 'QuestionsController@show')
 // Single-action controller, don't need to specify the action name
 Route::post('/answers/{answer}/accept', 'AcceptAnswersController')
   ->name('answers.accept');
+
+Route::patch('/questions/{question}/favorite', 'QuestionsController@favorite')
+  ->name('questions.favorite');
