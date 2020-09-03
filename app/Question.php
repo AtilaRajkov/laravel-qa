@@ -64,6 +64,13 @@ class Question extends Model
   }
 
 
+  public function acceptBestAnswer(Answer $answer)
+  {
+    $this->best_answer_id = $answer->id;
+    $this->save();
+  }
+
+
   public function getAnswersPaginatedAttribute()
   {
     return $this->answers()

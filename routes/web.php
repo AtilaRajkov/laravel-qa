@@ -31,3 +31,7 @@ Route::resource('questions.answers', 'AnswersController')
 
 Route::get('/questions/{slug}', 'QuestionsController@show')
   ->name('questions.show');
+
+// Single-action controller, don't need to specify the action name
+Route::post('/answers/{answer}/accept', 'AcceptAnswersController')
+  ->name('answers.accept');
