@@ -21,8 +21,6 @@ class Question extends Model
 
 
 
-
-
   public function setTitleAttribute($value)
   {
     $this->attributes['title'] = $value;
@@ -98,7 +96,24 @@ class Question extends Model
     return $this->favorites->count();
   }
 
+  public function votes()
+  {
+    return $this->morphToMany(User::class, 'votable');
+  }
 
+
+  public function upVotes()
+  {
+    return $this->votes()->wherePivot('vote', 1);
+  }
+
+  public function downVotes()
+  {
+    return $this->votes()->wherePivot('vote', -1);
+  }
+
+
+  // atila
   public function getAnswersPaginatedAttribute()
   {
     return $this->answers()
@@ -106,6 +121,7 @@ class Question extends Model
       ->paginate(4);
   }
 
+  /// atila
   public function toggleFavorite()
   {
     if (
@@ -118,6 +134,11 @@ class Question extends Model
       $this->favorites()->attach(auth()->id());
     }
   }
+
+
+
+
+
 
 
 

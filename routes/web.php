@@ -32,9 +32,13 @@ Route::resource('questions.answers', 'AnswersController')
 Route::get('/questions/{slug}', 'QuestionsController@show')
   ->name('questions.show');
 
-// Single-action controller, don't need to specify the action name
+// Single-action controller, doesn't need to specify the actions name
 Route::post('/answers/{answer}/accept', 'AcceptAnswersController')
   ->name('answers.accept');
 
 Route::patch('/questions/{question}/favorite', 'QuestionsController@favorite')
   ->name('questions.favorite');
+
+Route::post('/questions/{question}/vote', 'VoteQuestionController')
+  ->name('questions.vote');
+
