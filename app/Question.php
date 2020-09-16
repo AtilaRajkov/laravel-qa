@@ -67,7 +67,12 @@ class Question extends Model
 
   public function acceptBestAnswer(Answer $answer)
   {
-    $this->best_answer_id = $answer->id;
+    if ($this->best_answer_id === $answer->id) {
+      $this->best_answer_id = null;
+    } else {
+      $this->best_answer_id = $answer->id;
+    }
+
     $this->save();
   }
 
