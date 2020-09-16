@@ -15,7 +15,7 @@ class AcceptAnswersController extends Controller
     $answer->question->acceptBestAnswer($answer);
 
     return redirect(url()->previous() .
-      '#accept-answer-' . $answer->id . '-div');
+      '#answer-' . $answer->id . '-div');
   }
   
 }

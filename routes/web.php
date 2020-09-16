@@ -41,4 +41,5 @@ Route::patch('/questions/{question}/favorite', 'QuestionsController@favorite')
 
 Route::post('/questions/{question}/vote', 'VoteQuestionController')
   ->name('questions.vote');
-
+Route::post('/answers/{answer}/vote', 'VoteAnswerController')
+  ->name('answers.vote');

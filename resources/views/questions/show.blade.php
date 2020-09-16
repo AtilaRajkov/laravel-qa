@@ -25,7 +25,7 @@
             <div class="media">
               <div class="d-flex flex-column vote-controls">
                 <a title="This question is useful"
-                   class="vote-up {{ Auth::guest() ? 'off' : ''}}"
+                   class="vote-up {{ Auth::guest() ? 'off' : '' }}"
                    onclick="event.preventDefault();
                       document.getElementById('up-vote-question-{{$question->id}}').submit()"
                 >
