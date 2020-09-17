@@ -108,9 +108,10 @@ class QuestionsController extends Controller
 //    if (Gate::denies('update-question', $question)) {
 //      return abort(403, 'Access denied');
 //    }
-//    $question->update($request->only('title', 'body'));
 
     $this->authorize('update', $question);
+
+    $question->update($request->only('title', 'body'));
 
     return redirect(request('redirects_to'))
       ->with('success', 'Your question has been updated.');
