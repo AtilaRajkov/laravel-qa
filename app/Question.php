@@ -21,11 +21,11 @@ class Question extends Model
 
 
 
-//  public function setTitleAttribute($value)
-//  {
-//    $this->attributes['title'] = $value;
-//    $this->attributes['slug'] = Str::slug($value);
-//  }
+  public function setTitleAttribute($value)
+  {
+    $this->attributes['title'] = $value;
+    $this->attributes['slug'] = Str::slug($value);
+  }
 
 
   public function setBodyAttribute($value)
@@ -67,7 +67,8 @@ class Question extends Model
 
   public function answers()
   {
-    return $this->hasMany(Answer::class);
+    return $this->hasMany(Answer::class)
+      ->orderBy('votes_count', 'desc');
   }
 
 
@@ -132,7 +133,7 @@ class Question extends Model
   public function getAnswersPaginatedAttribute()
   {
     return $this->answers()
-//      ->latest()
+      //->orderBy('votes_count', 'desc')
       ->paginate(4);
   }
 
