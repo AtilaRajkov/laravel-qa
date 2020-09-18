@@ -24,7 +24,7 @@ class Answer extends Model
 
   public function getBodyHtmlAttribute()
   {
-    // This is resolved wit {!! $answer->body !!}
+    return clean($this->body);
   }
 
 

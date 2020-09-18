@@ -22,7 +22,7 @@
 
             </div>
             <div class="media-body">
-              {!! $answer->body !!}
+              {!! $answer->body_html !!}
 
               <div class="row mt-2">
                 <div class="col-4">

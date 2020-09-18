@@ -21,10 +21,16 @@ class Question extends Model
 
 
 
-  public function setTitleAttribute($value)
+//  public function setTitleAttribute($value)
+//  {
+//    $this->attributes['title'] = $value;
+//    $this->attributes['slug'] = Str::slug($value);
+//  }
+
+
+  public function setBodyAttribute($value)
   {
-    $this->attributes['title'] = $value;
-    $this->attributes['slug'] = Str::slug($value);
+    $this->attributes['body'] = clean($value);
   }
 
 
@@ -55,7 +61,7 @@ class Question extends Model
 
   public function getBodyHtmlAttribute()
   {
-    // This is resolved wit {!! $question->body !!}
+    return clean($this->body);
   }
 
 
@@ -99,6 +105,26 @@ class Question extends Model
   public function getFavoritesCountAttribute()
   {
     return $this->favorites->count();
+  }
+
+
+  public function getExcerptAttribute()
+  {
+    //return Str::limit(strip_tags($this->bodyHtml()),300);
+    return $this->excerpt(250);
+  }
+
+
+  public function excerpt($length)
+  {
+    return Str::limit($this->body_html, $length);
+  }
+
+
+  // Unused method
+  private function bodyHtml()
+  {
+    // return \Parsedown::instance()->text($this->body);
   }
 
 
